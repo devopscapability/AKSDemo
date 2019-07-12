@@ -2,21 +2,21 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    k8s-app: dockerdemolinux
-  name: dockerdemolinux
+    k8s-app: aksdemo
+  name: aksdemo
 spec:
   replicas: 2
   selector:
     matchLabels:
-      k8s-app: dockerdemolinux
+      k8s-app: aksdemo
   template:
     metadata:
       labels:
-        k8s-app: dockerdemolinux
+        k8s-app: aksdemo
     spec:
       containers:
-      - name: dockerdemolinux
-        image: prafulltest/dockerdemolinux:#{Build.BuildId}#
+      - name: aksdemo
+        image: prafulltest/aksdemo:#{Build.BuildId}#
         ports:
         - containerPort: 80
 ---
@@ -24,12 +24,12 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    k8s-app: dockerdemolinux
+    k8s-app: aksdemo
   name: dockerdemo-loadbalancer
 spec:
   type: LoadBalancer
   ports:
   - port: 80
   selector:
-     k8s-app: dockerdemolinux
-  app: dockerdemolinux
+     k8s-app: aksdemo
+  app: aksdemo
